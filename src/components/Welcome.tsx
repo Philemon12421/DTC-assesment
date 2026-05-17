@@ -25,13 +25,15 @@ export default function Welcome({ onStart, onViewDocs }: WelcomeProps) {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center gap-6"
           >
-            <div className="w-24 h-24 bg-primary p-4 rounded-[2.5rem] shadow-2xl shadow-primary/30 flex items-center justify-center border-4 border-white transition-transform hover:scale-110 duration-500">
-              <img 
-                src="https://kommodo.ai/i/D9EbP1JE0Xal0CY6cqRu" 
-                alt="DTC Logo" 
-                className="w-full h-full object-contain"
-              />
-            </div>
+            <div className="w-14 h-14 md:w-16 md:h-16 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 p-1">
+  <div className="w-full h-full rounded-full overflow-hidden bg-white shadow-sm border border-yellow-200">
+    <img
+      src="/logo 2.png"
+      alt="Drenchack Tech Company Logo"
+      className="w-full h-full object-cover"
+    />
+  </div>
+</div>
             <div className="flex flex-col items-center gap-1">
               <h2 className="text-sm font-bold text-primary-dark uppercase tracking-[0.4em]">Integrated Innovation</h2>
               <div className="w-12 h-1 bg-primary rounded-full" />
