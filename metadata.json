@@ -1,0 +1,8 @@
+{
+  "name": "Drenchack Tech Company (DTC) Portal",
+  "description": "Professional talent assessment and recruitment portal for DTC innovation and development teams.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
