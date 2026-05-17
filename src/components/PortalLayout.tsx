@@ -24,7 +24,13 @@ export default function PortalLayout({
       <nav className="h-20 border-b border-slate-100 flex items-center justify-between px-6 md:px-10 flex-shrink-0 bg-white z-30">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 p-2">
-           <img src="/logo 2.png"  alt="Drenchack Tech Company Logo"  className="w-full h-full object-contain"  loading="eager"/>
+         <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden bg-white shadow-sm border border-yellow-200">
+  <img
+    src="/logo 2.png"
+    alt="Drenchack Tech Company Logo"
+    className="w-full h-full object-cover"
+  />
+</div>
           </div>
           <div className="hidden sm:block">
             <h1 className="font-black text-lg leading-tight tracking-tighter text-slate-900">ASSESSMENT</h1>
