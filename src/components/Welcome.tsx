@@ -26,14 +26,14 @@ export default function Welcome({ onStart, onViewDocs }: WelcomeProps) {
             className="flex flex-col items-center gap-6"
           >
             <div className="w-14 h-14 md:w-16 md:h-16 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 p-1">
-  <div className="w-full h-full rounded-full overflow-hidden bg-white shadow-sm border border-yellow-200">
-    <img
-      src="/logo 2.png"
-      alt="Drenchack Tech Company Logo"
-      className="w-full h-full object-cover"
-    />
-  </div>
-</div>
+              <div className="w-full h-full rounded-full overflow-hidden bg-white shadow-sm border border-yellow-200">
+                <img
+                  src="/logo 2.png"
+                  alt="Drenchack Tech Company Logo"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
             <div className="flex flex-col items-center gap-1">
               <h2 className="text-sm font-bold text-primary-dark uppercase tracking-[0.4em]">Integrated Innovation</h2>
               <div className="w-12 h-1 bg-primary rounded-full" />
@@ -60,7 +60,7 @@ export default function Welcome({ onStart, onViewDocs }: WelcomeProps) {
               </span>
             </h1>
             <p className="text-base sm:text-xl md:text-2xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-medium px-4">
-              ASSESSMENT is a global innovation firm. We build high-impact software, solve complex problems, and develop elite talent.
+              Drenchack Tech Company is a global innovation firm. We build high-impact software, solve complex problems, and develop elite talent.
             </p>
           </motion.div>
 
@@ -76,7 +76,7 @@ export default function Welcome({ onStart, onViewDocs }: WelcomeProps) {
                 onClick={onStart}
                 className="w-full sm:w-auto group relative px-12 py-5 bg-primary hover:bg-primary-hover text-slate-900 rounded-[2rem] font-black text-lg shadow-2xl shadow-primary/20 transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3"
               >
-                Join ASSESSMENT Collective
+                Join DTC Collective
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               
@@ -108,7 +108,7 @@ export default function Welcome({ onStart, onViewDocs }: WelcomeProps) {
 
       {/* Corporate Footer (Partial) */}
       <footer className="p-8 border-t border-slate-100 flex justify-between items-center bg-slate-50/50">
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">© 2026 ASSESSMENT. ALL RIGHTS RESERVED.</p>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">© 2026 DRENCHACK TECH COMPANY. ALL RIGHTS RESERVED.</p>
         <div className="flex gap-6">
           <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">Privacy Policy</span>
           <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">Candidate Terms</span>

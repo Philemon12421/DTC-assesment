@@ -31,7 +31,9 @@ export default function AssessmentForm({
   const [showHint, setShowHint] = useState<string | null>(null);
   const [focusedField, setFocusedField] = useState<string | null>(null);
   
-  const { register, handleSubmit, watch, formState: { errors }, trigger, setValue } = useForm<CandidateData>({
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const { register, handleSubmit, watch, formState: { errors, isValid }, trigger, setValue } = useForm<CandidateData>({
     defaultValues: {
       status: 'pending',
       assessmentScore: 0,
@@ -70,8 +72,8 @@ export default function AssessmentForm({
 
   const getFieldsForStep = (step: number) => {
     switch (step) {
-      case 0: return ['fullName', 'email', 'phone', 'country', 'education', 'experience', 'currentSkills', 'desiredSkills', 'whyJoin', 'careerGoal', 'focusArea', 'linkedIn', 'github', 'twitter'];
-      case 1: return ['whyJoinDTC']; // Actually commitment questions can be mapped to custom fields
+      case 0: return ['fullName', 'email', 'phone', 'country', 'education', 'experience', 'linkedIn', 'github', 'twitter'];
+      case 1: return ['whyJoin'];
       default: return [];
     }
   };
@@ -114,6 +116,7 @@ export default function AssessmentForm({
     }
 
     setSubmissionError(null);
+    setIsSubmitting(true);
     
     try {
       const response = await fetch('https://formspree.io/f/mreoqrky', {
@@ -126,9 +129,11 @@ export default function AssessmentForm({
       });
 
       if (response.ok) {
+        setIsSubmitting(false);
         setSubmissionError(null);
         onSubmit(finalData);
       } else {
+        setIsSubmitting(false);
         const errData = await response.json();
         if (errData.errors && Array.isArray(errData.errors)) {
           const messages = errData.errors.map((e: any) => e.message).join('. ');
@@ -138,6 +143,7 @@ export default function AssessmentForm({
         }
       }
     } catch (err) {
+      setIsSubmitting(false);
       setSubmissionError("A network error occurred. Please verify your connection or try again later.");
       console.error("Submission error:", err);
     }
@@ -873,9 +879,20 @@ export default function AssessmentForm({
                 )}
                 <button 
                   onClick={handleSubmit(onFormSubmit)}
-                  className="w-full py-4 bg-primary text-slate-900 rounded-2xl font-bold shadow-xl shadow-primary/20 hover:bg-primary-hover transition-all"
+                  disabled={isSubmitting}
+                  className={cn(
+                    "w-full py-4 bg-primary text-slate-900 rounded-2xl font-bold shadow-xl shadow-primary/20 hover:bg-primary-hover transition-all flex items-center justify-center gap-3",
+                    isSubmitting && "opacity-70 cursor-not-allowed"
+                  )}
                 >
-                  Yes, Submit My Profile
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
+                      Processing Application...
+                    </>
+                  ) : (
+                    "Yes, Submit My Profile"
+                  )}
                 </button>
                 <button 
                   onClick={() => {

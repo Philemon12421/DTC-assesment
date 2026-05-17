@@ -23,18 +23,18 @@ export default function PortalLayout({
       {/* Top Navigation Bar */}
       <nav className="h-20 border-b border-slate-100 flex items-center justify-between px-6 md:px-10 flex-shrink-0 bg-white z-30">
         <div className="flex items-center gap-4">
-     <div className="w-14 h-14 md:w-16 md:h-16 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 p-1">
-  <div className="w-full h-full rounded-full overflow-hidden bg-white shadow-sm border border-yellow-200">
-    <img
-      src="/logo 2.png"
-      alt="Drenchack Tech Company Logo"
-      className="w-full h-full object-cover"
-    />
-  </div>
-</div>
+          <div className="w-14 h-14 md:w-16 md:h-16 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 p-1">
+            <div className="w-full h-full rounded-full overflow-hidden bg-white shadow-sm border border-yellow-200">
+              <img
+                src="/logo 2.png"
+                alt="Drenchack Tech Company Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
           <div className="hidden sm:block">
-            <h1 className="font-black text-lg leading-tight tracking-tighter text-slate-900">ASSESSMENT</h1>
-            <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-black">Innovation & Future Builders</p>
+            <h1 className="font-black text-lg leading-tight tracking-tighter text-slate-900">DRENCHACK TECH COMPANY</h1>
+            <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-black">Innovation & Excellence</p>
           </div>
         </div>
         

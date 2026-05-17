@@ -38,11 +38,17 @@ export default function Documentation({ onBack }: DocumentationProps) {
     <div className="min-h-screen bg-slate-50 font-sans">
       <nav className="h-20 bg-white border-b border-slate-100 flex items-center justify-between px-6 md:px-10 sticky top-0 z-50">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 p-2">
-            <img src="https://kommodo.ai/i/D9EbP1JE0Xal0CY6cqRu" alt="Logo" className="w-full h-full object-contain" />
+          <div className="w-14 h-14 md:w-16 md:h-16 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 p-1">
+            <div className="w-full h-full rounded-full overflow-hidden bg-white shadow-sm border border-yellow-200">
+              <img
+                src="/logo 2.png"
+                alt="Drenchack Tech Company Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
           <div>
-            <h1 className="font-black text-lg tracking-tighter text-slate-900 leading-none">ASSESSMENT</h1>
+            <h1 className="font-black text-lg tracking-tighter text-slate-900 leading-none">DRENCHACK TECH COMPANY</h1>
             <p className="text-[9px] text-slate-400 uppercase tracking-[0.2em] font-black">Documentation Center</p>
           </div>
         </div>
@@ -62,8 +68,8 @@ export default function Documentation({ onBack }: DocumentationProps) {
         >
           <header className="space-y-4">
             <span className="px-3 py-1 bg-primary/20 rounded-full text-[10px] font-black uppercase tracking-widest text-primary-dark">Official Guide</span>
-            <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">The Assessment Blueprint</h2>
-            <p className="text-xl text-slate-500 font-medium max-w-2xl">Everything you need to know about joining our elite innovation force and our technical expectations.</p>
+            <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">The DTC Blueprint</h2>
+            <p className="text-xl text-slate-500 font-medium max-w-2xl">Everything you need to know about joining the elite innovation force and our technical expectations.</p>
           </header>
 
           <div className="grid gap-12">

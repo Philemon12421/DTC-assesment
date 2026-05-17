@@ -94,11 +94,17 @@ export default function AdminDashboard() {
       {/* Sidebar */}
       <aside className="w-72 bg-white border-r border-slate-100 p-8 flex flex-col gap-10">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 p-2">
-            <img src="https://kommodo.ai/i/D9EbP1JE0Xal0CY6cqRu" alt="Drenchack Logo" className="w-full h-full object-contain" />
+          <div className="w-14 h-14 md:w-16 md:h-16 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 p-1">
+            <div className="w-full h-full rounded-full overflow-hidden bg-white shadow-sm border border-yellow-200">
+              <img
+                src="/logo 2.png"
+                alt="Drenchack Tech Company Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
           <div>
-            <span className="font-black text-xl tracking-tighter text-slate-900 block leading-none">ASSESSMENT</span>
+            <span className="font-black text-xl tracking-tighter text-slate-900 block leading-none">DRENCHACK TECH COMPANY</span>
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Admin Command</span>
           </div>
         </div>
