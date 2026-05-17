@@ -26,11 +26,17 @@ export default function AssessmentForm({
   const [activeSkillInfo, setActiveSkillInfo] = useState<Skill | null>(null);
   const [activeFaq, setActiveFaq] = useState<FAQItem[] | null>(null);
   const [isConfirming, setIsConfirming] = useState(false);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const [showHint, setShowHint] = useState<string | null>(null);
   
   const { register, handleSubmit, watch, formState: { errors }, trigger, setValue } = useForm<CandidateData>({
     defaultValues: {
       status: 'pending',
       assessmentScore: 0,
+      fullName: '',
+      email: '',
+      phone: '',
+      country: '',
     }
   });
 
@@ -76,7 +82,7 @@ export default function AssessmentForm({
     }
   };
 
-  const onFormSubmit = (data: CandidateData) => {
+  const onFormSubmit = async (data: CandidateData) => {
     // Calculate score based on assessment (Step 4)
     let score = Math.floor(Math.random() * 40) + 60; // Mock score for now
     
@@ -91,8 +97,29 @@ export default function AssessmentForm({
       setIsConfirming(true);
       return;
     }
+
+    setSubmissionError(null);
     
-    onSubmit(finalData);
+    try {
+      const response = await fetch('https://formspree.io/f/mreoqrky', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(finalData)
+      });
+
+      if (response.ok) {
+        onSubmit(finalData);
+      } else {
+        const errData = await response.json();
+        setSubmissionError(errData.error || "Submission failed. Please check your connection and try again.");
+      }
+    } catch (err) {
+      setSubmissionError("A network error occurred. Please verify your internet connection.");
+      console.error("Submission error:", err);
+    }
   };
 
   const getDynamicQuestions = useMemo(() => {
@@ -131,7 +158,7 @@ export default function AssessmentForm({
                   <input 
                     {...register('fullName', { required: true })}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="John Doe"
+                    placeholder="Kwame Ankrah"
                   />
                   {errors.fullName && <span className="text-xs text-red-500">Required field</span>}
                 </div>
@@ -140,7 +167,7 @@ export default function AssessmentForm({
                   <input 
                     {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="john@example.com"
+                    placeholder="kwame@example.com"
                   />
                 </div>
                 <div className="space-y-1">
@@ -148,7 +175,7 @@ export default function AssessmentForm({
                   <input 
                     {...register('phone', { required: true })}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="+1 234 567 890"
+                    placeholder="+233 24 000 0000"
                   />
                 </div>
                 <div className="space-y-1">
@@ -156,7 +183,7 @@ export default function AssessmentForm({
                   <input 
                     {...register('country', { required: true })}
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="United States"
+                    placeholder="Ghana"
                   />
                 </div>
               </div>
@@ -353,10 +380,36 @@ export default function AssessmentForm({
               <div className="space-y-8">
                 {/* General Question */}
                 <div className="bg-white p-8 border border-slate-100 rounded-3xl shadow-sm space-y-6 transition-all hover:border-primary/20">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs ring-4 ring-slate-100">1</div>
-                    <p className="font-bold text-lg text-slate-800">Problem Solving</p>
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs ring-4 ring-slate-100">1</div>
+                      <p className="font-bold text-lg text-slate-800">Problem Solving</p>
+                    </div>
+                    <button 
+                      type="button"
+                      onClick={() => setShowHint(showHint === 'apt1' ? null : 'apt1')}
+                      className="p-2 text-slate-400 hover:text-primary transition-colors shrink-0"
+                    >
+                      <HelpCircle className="w-5 h-5" />
+                    </button>
                   </div>
+
+                  <AnimatePresence>
+                    {showHint === 'apt1' && (
+                      <motion.div 
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="ml-11 p-4 bg-slate-50 border border-slate-100 rounded-xl text-xs font-medium text-slate-600 flex items-start gap-2">
+                          <Info className="w-4 h-4 text-slate-400 shrink-0" />
+                          <span><strong className="text-slate-900">Hint:</strong> Scalability and availability are key when dealing with users from multiple regions.</span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
                   <p className="text-slate-600 leading-relaxed pl-11">Imagine you are building a tool for DTC that needs to handle high traffic from multiple countries. Which architecture approach would you prioritize?</p>
                   <div className="space-y-3 pl-11">
                     {[
@@ -383,10 +436,38 @@ export default function AssessmentForm({
 
                     {getDynamicQuestions.map((q, idx) => (
                       <div key={q.id} className="bg-white p-8 border border-slate-100 rounded-3xl shadow-sm space-y-6 transition-all hover:border-primary/20">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-primary text-slate-900 flex items-center justify-center font-bold text-xs ring-4 ring-primary/20">{idx + 2}</div>
-                          <p className="font-bold text-lg text-slate-800">{q.question}</p>
+                        <div className="flex items-start justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-primary text-slate-900 flex items-center justify-center font-bold text-xs ring-4 ring-primary/20">{idx + 2}</div>
+                            <p className="font-bold text-lg text-slate-800">{q.question}</p>
+                          </div>
+                          {q.hint && (
+                            <button 
+                              type="button"
+                              onClick={() => setShowHint(showHint === q.id ? null : q.id)}
+                              className="p-2 text-slate-400 hover:text-primary transition-colors shrink-0"
+                            >
+                              <HelpCircle className="w-5 h-5" />
+                            </button>
+                          )}
                         </div>
+
+                        <AnimatePresence>
+                          {showHint === q.id && q.hint && (
+                            <motion.div 
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="ml-11 p-4 bg-primary/5 border border-primary/20 rounded-xl text-xs font-medium text-slate-600 flex items-start gap-2">
+                                <Info className="w-4 h-4 text-primary shrink-0" />
+                                <span><strong className="text-slate-900">Hint:</strong> {q.hint}</span>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+
                         <div className="space-y-3 pl-11">
                           {q.options.map(opt => (
                             <label key={opt} className="flex items-center gap-3 p-4 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer transition-all">
@@ -637,6 +718,12 @@ export default function AssessmentForm({
                 </div>
               </div>
               <div className="flex flex-col gap-3">
+                {submissionError && (
+                  <div className="p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3 text-red-600 text-sm font-medium">
+                    <AlertCircle className="w-5 h-5" />
+                    <span>{submissionError}</span>
+                  </div>
+                )}
                 <button 
                   onClick={handleSubmit(onFormSubmit)}
                   className="w-full py-4 bg-primary text-slate-900 rounded-2xl font-bold shadow-xl shadow-primary/20 hover:bg-primary-hover transition-all"
@@ -644,7 +731,10 @@ export default function AssessmentForm({
                   Yes, Submit My Profile
                 </button>
                 <button 
-                  onClick={() => setIsConfirming(false)}
+                  onClick={() => {
+                    setIsConfirming(false);
+                    setSubmissionError(null);
+                  }}
                   className="w-full py-4 bg-white text-slate-500 rounded-2xl font-bold hover:text-slate-900 transition-all"
                 >
                   Go Back and Review

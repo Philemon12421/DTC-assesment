@@ -3,9 +3,10 @@ import { ChevronRight, Globe, Code, Shield, Lightbulb, Users, Laptop } from 'luc
 
 interface WelcomeProps {
   onStart: () => void;
+  onViewDocs: () => void;
 }
 
-export default function Welcome({ onStart }: WelcomeProps) {
+export default function Welcome({ onStart, onViewDocs }: WelcomeProps) {
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans overflow-auto select-none">
       {/* Top Banner */}
@@ -68,13 +69,22 @@ export default function Welcome({ onStart }: WelcomeProps) {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="flex flex-col items-center gap-8 w-full"
           >
-            <button 
-              onClick={onStart}
-              className="w-full sm:w-auto group relative px-8 sm:px-12 py-5 bg-primary hover:bg-primary-hover text-slate-900 rounded-2xl font-bold text-lg shadow-2xl shadow-primary/20 transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3"
-            >
-              Start Talent Assessment
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
+              <button 
+                onClick={onStart}
+                className="w-full sm:w-auto group relative px-12 py-5 bg-primary hover:bg-primary-hover text-slate-900 rounded-[2rem] font-black text-lg shadow-2xl shadow-primary/20 transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3"
+              >
+                Join DTC Collective
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+              
+              <button 
+                onClick={onViewDocs}
+                className="w-full sm:w-auto px-12 py-5 bg-white text-slate-900 rounded-[2rem] font-black text-lg border-2 border-slate-100 hover:border-primary transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3"
+              >
+                View Documentation
+              </button>
+            </div>
 
             <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 pt-6">
               <div className="flex items-center gap-2">

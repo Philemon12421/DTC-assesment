@@ -6,6 +6,7 @@ import {
   ArrowUpRight, Mail, Phone, MapPin, ExternalLink
 } from 'lucide-react';
 import { CandidateData } from '../types';
+import { cn } from '../lib/utils';
 
 // Mock data for dashboard visualization
 const MOCK_SUBMISSIONS: (CandidateData & { id: string })[] = [

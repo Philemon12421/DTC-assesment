@@ -12,9 +12,10 @@ import Result from './components/Result';
 import AdminDashboard from './components/AdminDashboard';
 import { CandidateData } from './types';
 
-type AppStage = 'welcome' | 'form' | 'processing' | 'result' | 'admin';
+type AppStage = 'welcome' | 'form' | 'processing' | 'result' | 'admin' | 'documentation';
 
 import PortalLayout from './components/PortalLayout';
+import Documentation from './components/Documentation';
 
 const STEPS = [
   "Information",
@@ -43,6 +44,14 @@ export default function App() {
     setStage('form');
   };
 
+  const handleViewDocumentation = () => {
+    setStage('documentation');
+  };
+
+  const handleBackToPortal = () => {
+    setStage('welcome');
+  };
+
   const handleFormSubmit = (data: CandidateData) => {
     setCandidateData(data);
     setStage('processing');
@@ -58,6 +67,18 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white selection:bg-primary/30 font-sans">
       <AnimatePresence mode="wait">
+        {stage === 'documentation' && (
+          <motion.div
+            key="documentation"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Documentation onBack={handleBackToPortal} />
+          </motion.div>
+        )}
+
         {stage === 'welcome' && (
           <motion.div
             key="welcome"
@@ -66,7 +87,7 @@ export default function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Welcome onStart={handleStartAssessment} />
+            <Welcome onStart={handleStartAssessment} onViewDocs={handleViewDocumentation} />
           </motion.div>
         )}
 

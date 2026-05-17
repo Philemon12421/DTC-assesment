@@ -44,6 +44,7 @@ export type RoleSpecificQuestion = {
   question: string;
   options: string[];
   correctAnswer: string;
+  hint?: string;
 };
 
 export type FAQItem = {
@@ -81,13 +82,15 @@ export const ROLE_QUESTIONS: Record<string, RoleSpecificQuestion[]> = {
       id: 'fe1',
       question: 'Which HTML tag is used to define an internal style sheet?',
       options: ['<css>', '<script>', '<style>', '<design>'],
-      correctAnswer: '<style>'
+      correctAnswer: '<style>',
+      hint: 'It is the standard tag for CSS code within an HTML document.'
     },
     {
       id: 'fe2',
       question: 'In React, what is the primary purpose of the "useMemo" hook?',
       options: ['To create refs', 'To memoize expensive calculations', 'To handle side effects', 'To manage global state'],
-      correctAnswer: 'To memoize expensive calculations'
+      correctAnswer: 'To memoize expensive calculations',
+      hint: 'Think about performance and avoiding unnecessary computations on every render.'
     }
   ],
   backend: [
@@ -95,13 +98,15 @@ export const ROLE_QUESTIONS: Record<string, RoleSpecificQuestion[]> = {
       id: 'be1',
       question: 'Which HTTP method is typically used to create a new resource in a REST API?',
       options: ['GET', 'POST', 'PUT', 'DELETE'],
-      correctAnswer: 'POST'
+      correctAnswer: 'POST',
+      hint: 'Think about the standard methods: GET for fetching, PUT for updating, and another for creation.'
     },
     {
       id: 'be2',
       question: 'Which of the following is a non-relational (NoSQL) database?',
       options: ['PostgreSQL', 'MySQL', 'MongoDB', 'SQLite'],
-      correctAnswer: 'MongoDB'
+      correctAnswer: 'MongoDB',
+      hint: 'NoSQL databases often store data in JSON-like documents rather than fixed tables.'
     }
   ],
   cybersecurity: [
@@ -109,13 +114,15 @@ export const ROLE_QUESTIONS: Record<string, RoleSpecificQuestion[]> = {
       id: 'cs1',
       question: 'What does the abbreviation SQL injection refer to?',
       options: ['Vaccinating servers', 'Database query manipulation', 'Cloud storage encryption', 'Network cable repair'],
-      correctAnswer: 'Database query manipulation'
+      correctAnswer: 'Database query manipulation',
+      hint: 'This vulnerability allows attackers to interfere with the queries that an application makes to its database.'
     },
     {
       id: 'cs2',
       question: 'Which protocol is used to provide secure communication over a computer network?',
       options: ['HTTP', 'FTP', 'HTTPS', 'Telnet'],
-      correctAnswer: 'HTTPS'
+      correctAnswer: 'HTTPS',
+      hint: 'It is the secure version of the protocol used for transmitting data between a web browser and a website.'
     }
   ],
   'ui-ux': [
@@ -123,13 +130,15 @@ export const ROLE_QUESTIONS: Record<string, RoleSpecificQuestion[]> = {
       id: 'ux1',
       question: 'What is the main goal of "User Research" in the design process?',
       options: ['To make the UI colorful', 'To understand user needs and behaviors', 'To write faster code', 'To increase marketing budget'],
-      correctAnswer: 'To understand user needs and behaviors'
+      correctAnswer: 'To understand user needs and behaviors',
+      hint: 'Design starts with empathy and understanding the people who will actually use the product.'
     },
     {
       id: 'ux2',
       question: 'What does "Fitt\'s Law" predict in UI design?',
       options: ['The color of buttons', 'The time required to move to a target area', 'The font size scaling', 'The load time of images'],
-      correctAnswer: 'The time required to move to a target area'
+      correctAnswer: 'The time required to move to a target area',
+      hint: 'It relates human movement to the distance and size of the target.'
     }
   ],
   'ai-ml': [
@@ -137,13 +146,15 @@ export const ROLE_QUESTIONS: Record<string, RoleSpecificQuestion[]> = {
       id: 'ai1',
       question: 'In Machine Learning, what is "Supervised Learning"?',
       options: ['Learning without data', 'Learning with labeled training data', 'Learning by playing games', 'A human teaching a robot live'],
-      correctAnswer: 'Learning with labeled training data'
+      correctAnswer: 'Learning with labeled training data',
+      hint: 'This type of learning involves providing the algorithm with pre-labeled examples to learn from.'
     },
     {
       id: 'ai2',
       question: 'What is a "Neural Network" primarily modeled after?',
       options: ['Computer circuits', 'Social networks', 'The human brain structure', 'Spider webs'],
-      correctAnswer: 'The human brain structure'
+      correctAnswer: 'The human brain structure',
+      hint: 'It consists of interconnected nodes that mimic the way biological neurons work.'
     }
   ]
 };

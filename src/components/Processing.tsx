@@ -13,15 +13,6 @@ export default function Processing({ candidateData, onComplete }: ProcessingProp
   const [currentAction, setCurrentAction] = useState("Initializing Review...");
 
   useEffect(() => {
-    // Send to Formspree
-    if (candidateData) {
-      fetch('https://formspree.io/f/mreoqrky', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(candidateData),
-      });
-    }
-
     // Simulate review process
     const duration = 15000; // 15 seconds
     const interval = 50;
