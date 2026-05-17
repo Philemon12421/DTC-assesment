@@ -32,56 +32,89 @@ export default function Result({ candidateData }: ResultProps) {
     const doc = new jsPDF();
     const date = new Date().toLocaleDateString();
     
-    // Header
+    // Header - Modern Banner
+    doc.setFillColor(15, 23, 42); // Slate-900
+    doc.rect(0, 0, 210, 45, 'F');
     doc.setFillColor(250, 204, 21); // Yellow-400
-    doc.rect(0, 0, 210, 40, 'F');
-    doc.setFontSize(24);
-    doc.setTextColor(15, 23, 42); // Slate-900
-    doc.text('DRENCHACK TECH COMPANY (DTC)', 105, 25, { align: 'center' });
+    doc.rect(0, 42, 210, 3, 'F'); // Accent Line
     
-    // Content
-    doc.setFontSize(16);
-    doc.setTextColor(51, 65, 85); // Slate-700
-    doc.text('OFFICIAL ACCEPTANCE LETTER', 105, 55, { align: 'center' });
-    
-    doc.setFontSize(12);
-    doc.text(`Date: ${date}`, 20, 75);
-    doc.text(`Candidate Name: ${candidateData.fullName}`, 20, 85);
-    doc.text(`Assessment Score: ${candidateData.assessmentScore}%`, 20, 95);
-    
-    const bodyText = `
-Dear ${candidateData.fullName},
-
-It is with great pleasure that we officially welcome you to Drenchack Tech Company (DTC). 
-
-Following a rigorous evaluation of your technical capabilities, professional experience, and creative potential, we are pleased to confirm your acceptance as an Elite Member of our innovation collective. Your impressive assessment score of ${candidateData.assessmentScore}% demonstrates the high level of expertise and dedication we value at DTC.
-
-At Drenchack Tech Company, we are committed to pushing the boundaries of what is possible in the digital landscape. We don't just build software, we pioneer transformative solutions that impact people globally. As part of our team, you will be integral to our mission of delivering excellence through collaborative innovation.
-
-You will soon receive a comprehensive onboarding package via email, which will detail your initial project assignments, team structure, and access credentials for our private development repositories.
-
-We are excited about the unique contributions you will bring to our team and look forward to building the future of technology together.
-
-Welcome to the forefront of innovation.
-
-Sincerely,
-
-Philemon Osei
-Founder & CEO
-Drenchack Tech Company (DTC)
-    `;
-    
-    const splitText = doc.splitTextToSize(bodyText, 170);
-    doc.text(splitText, 20, 110);
-    
-    // Signature placeholder
-    doc.setDrawColor(226, 232, 240); // Slate-200
-    doc.line(20, 240, 80, 240);
-    doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
-    doc.text('Philemon Osei', 20, 246);
+    doc.setFontSize(22);
+    doc.setTextColor(255, 255, 255);
+    doc.text('DRENCHACK TECH COMPANY', 105, 22, { align: 'center' });
+    doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
-    doc.text('Founder & CEO, DTC', 20, 252);
+    doc.text('INNOVATION • EXCELLENCE • MASTERY', 105, 30, { align: 'center' });
+    
+    // Date & Reference
+    doc.setTextColor(51, 65, 85); // Slate-700
+    doc.setFontSize(10);
+    doc.text(`Ref: DTC-AL-${Math.random().toString(36).substring(7).toUpperCase()}`, 190, 60, { align: 'right' });
+    doc.text(`Date: ${date}`, 20, 60);
+    
+    // Recipient Info
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "bold");
+    doc.text('To:', 20, 75);
+    doc.setFont("helvetica", "normal");
+    doc.text(candidateData.fullName, 35, 75);
+    doc.setFont("helvetica", "bold");
+    doc.text('Subject:', 20, 82);
+    doc.setFont("helvetica", "normal");
+    doc.text('Official Acceptance into the DTC Innovation Collective', 40, 82);
+    
+    // Horizontal Line
+    doc.setDrawColor(226, 232, 240);
+    doc.line(20, 88, 190, 88);
+    
+    const bodyText = `Dear ${candidateData.fullName},
+
+On behalf of Drenchack Tech Company (DTC), it is an absolute honor to formally welcome you to our international collective of innovators, engineers, and creative thinkers. 
+
+Following a comprehensive review of your technical portfolio and your outstanding assessment performance—achieving a score of ${candidateData.assessmentScore}%—our admissions committee has identified you as a high-potential candidate who embodies the spirit of technical mastery and forward-thinking problem solving that we cultivate at DTC.
+
+At Drenchack Tech Company, we operate at the intersection of complex systems engineering and human-centric design. Our mission is to build the next generation of digital infrastructure that empowers communities and solves real-world challenges globally. By joining us, you are not just taking a role; you are becoming a part of a meritocratic ecosystem where ideas are the ultimate currency and excellence is our collective standard.
+
+What to Expect Next:
+1. Digital Onboarding Packet: You will receive a secure portal link via email to complete your full member registration and profile setup.
+2. Resource Access: Your credentials for our private development repositories and internal knowledge base will be provisioned within 48 hours.
+3. Team Sync: You will be scheduled for a virtual introduction session with your primary innovation circle.
+
+We believe that your expertise will be instrumental in the mission ahead. We are excited to see the impact of your contributions as we continue to push the boundaries of technology.
+
+Welcome to the forefront of innovation. Welcome to Drenchack Tech Company.
+
+Sincerely,`;
+
+    doc.setFontSize(10.5);
+    doc.setFont("helvetica", "normal");
+    const splitText = doc.splitTextToSize(bodyText, 170);
+    doc.text(splitText, 20, 100);
+    
+    // Signature Block with stylized digital signature
+    const signatureY = 230;
+    doc.setFont("courier", "italic");
+    doc.setFontSize(16);
+    doc.setTextColor(15, 23, 42);
+    doc.text('Philemon Osei', 25, signatureY); // Stylized digital signature
+    
+    doc.setDrawColor(15, 23, 42);
+    doc.setLineWidth(0.5);
+    doc.line(20, signatureY + 2, 80, signatureY + 2); // Signature line
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.text('Philemon Osei', 20, signatureY + 10);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(100, 116, 139);
+    doc.text('Founder & CEO', 20, signatureY + 15);
+    doc.text('Drenchack Tech Company (DTC)', 20, signatureY + 20);
+    
+    // Footer contact info
+    doc.setFontSize(8);
+    doc.setTextColor(148, 163, 184);
+    doc.text('This is an electronically generated and verified document. Integrity is maintained via our blockchain-based talent ledger.', 105, 285, { align: 'center' });
+    doc.text('www.drenchack.com • recruitment@drenchack.com • Innovation Hub, Global', 105, 290, { align: 'center' });
     
     doc.save(`DTC_Acceptance_Letter_${candidateData.fullName.replace(/\s+/g, '_')}.pdf`);
   };
