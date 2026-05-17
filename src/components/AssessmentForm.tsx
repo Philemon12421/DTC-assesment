@@ -28,6 +28,7 @@ export default function AssessmentForm({
   const [isConfirming, setIsConfirming] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
   const [showHint, setShowHint] = useState<string | null>(null);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
   
   const { register, handleSubmit, watch, formState: { errors }, trigger, setValue } = useForm<CandidateData>({
     defaultValues: {
@@ -111,13 +112,19 @@ export default function AssessmentForm({
       });
 
       if (response.ok) {
+        setSubmissionError(null);
         onSubmit(finalData);
       } else {
         const errData = await response.json();
-        setSubmissionError(errData.error || "Submission failed. Please check your connection and try again.");
+        if (errData.errors && Array.isArray(errData.errors)) {
+          const messages = errData.errors.map((e: any) => e.message).join('. ');
+          setSubmissionError(messages || "Submission rejected. Please check your information.");
+        } else {
+          setSubmissionError(errData.error || "The submission service is currently unavailable. Please try again.");
+        }
       }
     } catch (err) {
-      setSubmissionError("A network error occurred. Please verify your internet connection.");
+      setSubmissionError("A network error occurred. Please verify your connection or try again later.");
       console.error("Submission error:", err);
     }
   };
@@ -152,41 +159,97 @@ export default function AssessmentForm({
                 </button>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-1">
-                  <label className="text-sm font-semibold text-slate-700">Full Name</label>
-                  <input 
-                    {...register('fullName', { required: true })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="Kwame Ankrah"
-                  />
-                  {errors.fullName && <span className="text-xs text-red-500">Required field</span>}
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-1 relative">
+                    <label className="text-sm font-semibold text-slate-700">Full Name</label>
+                    <input 
+                      {...register('fullName', { required: true })}
+                      onFocus={() => setFocusedField('fullName')}
+                      onBlur={() => setFocusedField(null)}
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                      placeholder="Kwame Ankrah"
+                    />
+                    <AnimatePresence>
+                      {focusedField === 'fullName' && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="absolute -top-8 right-0 bg-slate-900 text-white text-[10px] px-2 py-1 rounded-md font-bold z-10 shadow-lg"
+                        >
+                          Legal name per official documents
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                    {errors.fullName && <span className="text-xs text-red-500">Required field</span>}
+                  </div>
+                  <div className="space-y-1 relative">
+                    <label className="text-sm font-semibold text-slate-700">Email Address</label>
+                    <input 
+                      {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+                      onFocus={() => setFocusedField('email')}
+                      onBlur={() => setFocusedField(null)}
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                      placeholder="kwame@example.com"
+                    />
+                    <AnimatePresence>
+                      {focusedField === 'email' && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="absolute -top-8 right-0 bg-slate-900 text-white text-[10px] px-2 py-1 rounded-md font-bold z-10 shadow-lg"
+                        >
+                          Use a professional mailbox
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  <div className="space-y-1 relative">
+                    <label className="text-sm font-semibold text-slate-700">Phone Number</label>
+                    <input 
+                      {...register('phone', { required: true })}
+                      onFocus={() => setFocusedField('phone')}
+                      onBlur={() => setFocusedField(null)}
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                      placeholder="+233 24 000 0000"
+                    />
+                    <AnimatePresence>
+                      {focusedField === 'phone' && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="absolute -top-8 right-0 bg-slate-900 text-white text-[10px] px-2 py-1 rounded-md font-bold z-10 shadow-lg"
+                        >
+                          Include your country code
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  <div className="space-y-1 relative">
+                    <label className="text-sm font-semibold text-slate-700">Country</label>
+                    <input 
+                      {...register('country', { required: true })}
+                      onFocus={() => setFocusedField('country')}
+                      onBlur={() => setFocusedField(null)}
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                      placeholder="Ghana"
+                    />
+                    <AnimatePresence>
+                      {focusedField === 'country' && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="absolute -top-8 right-0 bg-slate-900 text-white text-[10px] px-2 py-1 rounded-md font-bold z-10 shadow-lg"
+                        >
+                          Current country of residence
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
-                <div className="space-y-1">
-                  <label className="text-sm font-semibold text-slate-700">Email Address</label>
-                  <input 
-                    {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="kwame@example.com"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-sm font-semibold text-slate-700">Phone Number</label>
-                  <input 
-                    {...register('phone', { required: true })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="+233 24 000 0000"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-sm font-semibold text-slate-700">Country</label>
-                  <input 
-                    {...register('country', { required: true })}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="Ghana"
-                  />
-                </div>
-              </div>
 
               <div className="space-y-6">
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
@@ -719,9 +782,18 @@ export default function AssessmentForm({
               </div>
               <div className="flex flex-col gap-3">
                 {submissionError && (
-                  <div className="p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3 text-red-600 text-sm font-medium">
-                    <AlertCircle className="w-5 h-5" />
-                    <span>{submissionError}</span>
+                  <div className="p-4 bg-red-50 border border-red-100 rounded-xl flex flex-col gap-3">
+                    <div className="flex items-center gap-3 text-red-600 text-sm font-medium">
+                      <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                      <span className="text-left leading-tight">{submissionError}</span>
+                    </div>
+                    <button 
+                      type="button"
+                      onClick={handleSubmit(onFormSubmit)}
+                      className="text-[10px] font-black uppercase tracking-widest text-red-700 hover:text-red-900 flex items-center justify-center gap-2 py-2.5 bg-red-100/50 rounded-xl transition-all hover:bg-red-100"
+                    >
+                      <Zap className="w-3 h-3" /> Retry Submission
+                    </button>
                   </div>
                 )}
                 <button 
