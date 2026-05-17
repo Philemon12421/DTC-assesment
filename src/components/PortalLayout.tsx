@@ -27,8 +27,8 @@ export default function PortalLayout({
             <img src="https://kommodo.ai/i/D9EbP1JE0Xal0CY6cqRu" alt="Drenchack Logo" className="w-full h-full object-contain" />
           </div>
           <div className="hidden sm:block">
-            <h1 className="font-black text-xl leading-tight tracking-tighter text-slate-900">DRENCHACK</h1>
-            <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-black">Innovation Hub</p>
+            <h1 className="font-black text-lg leading-tight tracking-tighter text-slate-900">DRENCHACK TECH COMPANY</h1>
+            <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-black">Innovation & Excellence</p>
           </div>
         </div>
         

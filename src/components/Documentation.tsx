@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
-import { ChevronLeft, Zap, Target, Shield, Globe, Users, BookOpen, Code, Terminal, Cpu } from 'lucide-react';
+import { ChevronLeft, Zap, Target, Shield, Globe, Users, BookOpen, Code, Terminal, Cpu, Info, CheckCircle2 } from 'lucide-react';
+import { SKILLS } from '../types';
 
 interface DocumentationProps {
   onBack: () => void;
@@ -41,7 +42,7 @@ export default function Documentation({ onBack }: DocumentationProps) {
             <img src="https://kommodo.ai/i/D9EbP1JE0Xal0CY6cqRu" alt="Logo" className="w-full h-full object-contain" />
           </div>
           <div>
-            <h1 className="font-black text-lg tracking-tighter text-slate-900 leading-none">DRENCHACK</h1>
+            <h1 className="font-black text-lg tracking-tighter text-slate-900 leading-none">DRENCHACK TECH</h1>
             <p className="text-[9px] text-slate-400 uppercase tracking-[0.2em] font-black">Documentation Center</p>
           </div>
         </div>
@@ -57,12 +58,12 @@ export default function Documentation({ onBack }: DocumentationProps) {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-16"
+          className="space-y-24"
         >
           <header className="space-y-4">
             <span className="px-3 py-1 bg-primary/20 rounded-full text-[10px] font-black uppercase tracking-widest text-primary-dark">Official Guide</span>
-            <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight">The DTC Blueprint</h2>
-            <p className="text-xl text-slate-500 font-medium">Everything you need to know about joining the elite innovation force.</p>
+            <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">The DTC Blueprint</h2>
+            <p className="text-xl text-slate-500 font-medium max-w-2xl">Everything you need to know about joining the elite innovation force and our technical expectations.</p>
           </header>
 
           <div className="grid gap-12">
@@ -89,28 +90,109 @@ export default function Documentation({ onBack }: DocumentationProps) {
             ))}
           </div>
 
-          <div className="bg-slate-900 p-12 rounded-[3.5rem] text-center space-y-8">
+          <div className="space-y-12">
             <div className="space-y-4">
-              <h3 className="text-3xl font-black text-white">Ready to make your mark?</h3>
-              <p className="text-slate-400 font-medium text-lg">The talent assessment is open for elite candidates globally.</p>
+              <h3 className="text-4xl font-black text-slate-900 tracking-tight">Official Roadmaps</h3>
+              <p className="text-lg text-slate-500 font-medium">Detailed progression paths for every technical career track at DTC.</p>
+            </div>
+
+            <div className="grid gap-10">
+              {SKILLS.filter(s => s.roadmap).map((skill, sIdx) => (
+                <motion.div 
+                  key={skill.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-[3.5rem] border border-slate-100 overflow-hidden shadow-premium"
+                >
+                  <div className="p-10 bg-slate-900 text-white">
+                    <div className="flex justify-between items-center">
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-primary">Technical Roadmap</span>
+                        <h4 className="text-3xl font-black">{skill.name}</h4>
+                      </div>
+                      <div className="p-4 bg-white/10 rounded-2xl">
+                        <Code className="w-8 h-8 text-primary" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-10 grid md:grid-cols-3 gap-8">
+                    {/* Foundation */}
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-3 pb-4 border-b border-slate-50">
+                        <div className="w-2 h-2 rounded-full bg-primary" />
+                        <span className="text-xs font-black uppercase tracking-widest text-slate-400">Foundation</span>
+                      </div>
+                      <ul className="space-y-4">
+                        {skill.roadmap?.foundation.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-3 text-sm text-slate-600 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-slate-200 mt-0.5" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Intermediate */}
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-3 pb-4 border-b border-slate-50">
+                        <div className="w-2 h-2 rounded-full bg-blue-500" />
+                        <span className="text-xs font-black uppercase tracking-widest text-slate-400">Intermediate</span>
+                      </div>
+                      <ul className="space-y-4">
+                        {skill.roadmap?.intermediate.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-3 text-sm text-slate-600 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-slate-200 mt-0.5" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Advanced */}
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-3 pb-4 border-b border-slate-50">
+                        <div className="w-2 h-2 rounded-full bg-purple-500" />
+                        <span className="text-xs font-black uppercase tracking-widest text-slate-400">Elite / Advanced</span>
+                      </div>
+                      <ul className="space-y-4">
+                        {skill.roadmap?.advanced.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-3 text-sm text-slate-600 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-primary mt-0.5" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-primary p-16 rounded-[4rem] text-center space-y-8 shadow-2xl shadow-primary/30">
+            <div className="space-y-4">
+              <h3 className="text-4xl font-black text-slate-900 tracking-tight">Ready to join the elite?</h3>
+              <p className="text-slate-800 font-bold text-xl max-w-xl mx-auto">Your technical journey starts with our immersive assessment process.</p>
             </div>
             <button 
               onClick={onBack}
-              className="px-10 py-5 bg-primary text-slate-900 rounded-[2rem] font-black text-lg hover:bg-primary-hover transition-all shadow-2xl shadow-primary/20"
+              className="px-12 py-6 bg-slate-900 text-white rounded-[2.5rem] font-black text-xl hover:bg-slate-800 transition-all shadow-2xl shadow-slate-900/20 active:scale-95"
             >
-              Start Your Journey
+              Start Talent Assessment
             </button>
           </div>
         </motion.div>
       </main>
 
-      <footer className="py-12 border-t border-slate-100 text-center space-y-4">
-        <div className="flex justify-center gap-6">
-          <Terminal className="w-5 h-5 text-slate-300" />
-          <Code className="w-5 h-5 text-slate-300" />
-          <BookOpen className="w-5 h-5 text-slate-300" />
+      <footer className="py-16 border-t border-slate-100 text-center space-y-6">
+        <div className="flex justify-center gap-8">
+          <Terminal className="w-6 h-6 text-slate-200" />
+          <Code className="w-6 h-6 text-slate-200" />
+          <BookOpen className="w-6 h-6 text-slate-200" />
         </div>
-        <p className="text-[10px] font-black uppercase tracking-widest text-slate-300">© 2026 Drenchack Tech Company. All Rights Reserved.</p>
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">© 2026 Drenchack Tech Company. All Rights Reserved.</p>
       </footer>
     </div>
   );

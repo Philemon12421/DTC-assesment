@@ -98,8 +98,8 @@ export default function AdminDashboard() {
             <img src="https://kommodo.ai/i/D9EbP1JE0Xal0CY6cqRu" alt="Drenchack Logo" className="w-full h-full object-contain" />
           </div>
           <div>
-            <span className="font-black text-xl tracking-tighter text-slate-900 block leading-none">Drenchack</span>
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Admin Center</span>
+            <span className="font-black text-xl tracking-tighter text-slate-900 block leading-none">DRENCHACK TECH</span>
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Admin Command</span>
           </div>
         </div>
 

@@ -106,10 +106,10 @@ export default function Welcome({ onStart, onViewDocs }: WelcomeProps) {
 
       {/* Corporate Footer (Partial) */}
       <footer className="p-8 border-t border-slate-100 flex justify-between items-center bg-slate-50/50">
-        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">© 2024 Drenchack Tech Company. All Rights Reserved.</p>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">© 2026 DRENCHACK TECH COMPANY. ALL RIGHTS RESERVED.</p>
         <div className="flex gap-6">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">Privacy Policy</span>
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">Candidate Terms</span>
+          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">Privacy Policy</span>
+          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">Candidate Terms</span>
         </div>
       </footer>
     </div>

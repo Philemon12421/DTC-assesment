@@ -4,6 +4,11 @@ export type Skill = {
   career: string;
   techStack: string[];
   description: string;
+  roadmap?: {
+    foundation: string[];
+    intermediate: string[];
+    advanced: string[];
+  };
 };
 
 export type AssessmentQuestion = {
@@ -165,76 +170,71 @@ export const SKILLS: Skill[] = [
     name: 'Frontend Development',
     career: 'Build websites and user interfaces.',
     techStack: ['HTML', 'React', 'React Native', 'Flutter'],
-    description: 'Specializing in visual interfaces and user experiences.'
+    description: 'Specializing in visual interfaces and user experiences.',
+    roadmap: {
+      foundation: ['HTML5 Semantic Markup', 'CSS3 Layouts (Flex/Grid)', 'Modern JavaScript (ES6+)', 'Version Control (Git)'],
+      intermediate: ['React Hooks & Context', 'Tailwind CSS Systems', 'TypeScript Fundamentals', 'API Integration'],
+      advanced: ['Next.js Architecture', 'Server Component Optimization', 'State Management (Redux/Zustand)', 'Micro-Frontend Patterns']
+    }
   },
   {
     id: 'backend',
     name: 'Backend Development',
     career: 'Build servers, APIs, and system logic.',
     techStack: ['Java', 'Node.js', 'Django'],
-    description: 'Core system stability and high-performance logic.'
+    description: 'Core system stability and high-performance logic.',
+    roadmap: {
+      foundation: ['Server-side Logic (Node/Python)', 'HTTP/REST Fundamentals', 'SQL Basics (Postgres)', 'Data Structures'],
+      intermediate: ['Distributed Databases', 'Authentication (OAuth/JWT)', 'Docker Containerization', 'Middleware Design'],
+      advanced: ['System Design at Scale', 'Kubernetes Orchestration', 'gRPC & Message Brokers', 'Cloud Infrastructure Design']
+    }
   },
   {
     id: 'cybersecurity',
     name: 'Cybersecurity',
     career: 'Protect systems and test vulnerabilities.',
     techStack: ['Python', 'Networking', 'Java', 'PHP', 'SQL'],
-    description: 'System hardening and vulnerability management.'
+    description: 'System hardening and vulnerability management.',
+    roadmap: {
+      foundation: ['Networking Protocols (TCP/IP)', 'Linux Fundamentals', 'Basics of Cryptography', 'Security Mindset'],
+      intermediate: ['Penetration Testing (OWASP)', 'Network Scanning (Nmap)', 'Static Application Security (SAST)', 'Firewall Configuration'],
+      advanced: ['Reverse Engineering', 'Malware Analysis', 'Zero Trust Architecture', 'Cloud Compliance & Auditing']
+    }
   },
   {
     id: 'ai-ml',
     name: 'AI and Machine Learning',
     career: 'Build intelligent systems and automation.',
     techStack: ['Python', 'TensorFlow', 'PyTorch', 'APIs'],
-    description: 'Predictive modeling and intelligent automation.'
+    description: 'Predictive modeling and intelligent automation.',
+    roadmap: {
+      foundation: ['Python for Data Science', 'Linear Algebra & Calculus', 'Statistics & Probability', 'Data Wrangling (Pandas)'],
+      intermediate: ['Supervised & Unsupervised Learning', 'Neural Network Architectures', 'Natural Language Processing (NLP)', 'Computer Vision'],
+      advanced: ['LLM Orchestration', 'GANs & Generative AI', 'MLOps (Deployment & Monitoring)', 'Reinforcement Learning']
+    }
   },
   {
     id: 'data-science',
     name: 'Data Science / Data Scientist',
     career: 'Analyze and interpret data.',
     techStack: ['Python', 'SQL', 'Pandas', 'Visualization'],
-    description: 'Data-driven decision making and analysis.'
-  },
-  {
-    id: 'cloud',
-    name: 'Cloud Engineering',
-    career: 'Deploy and manage cloud systems.',
-    techStack: ['AWS', 'Azure', 'Docker', 'Linux'],
-    description: 'Scalable infrastructure and DevOps practices.'
-  },
-  {
-    id: 'mobile',
-    name: 'Mobile App Development',
-    career: 'Build mobile applications.',
-    techStack: ['React Native', 'Flutter'],
-    description: 'Cross-platform mobile experience builder.'
+    description: 'Data-driven decision making and analysis.',
+    roadmap: {
+      foundation: ['SQL for Analytics', 'Data Exploration (EDA)', 'Probability Theory', 'Dashboarding Basics'],
+      intermediate: ['Statistical Hypothesis Testing', 'Machine Learning for Prediction', 'Feature Engineering', 'Big Data Intro (Spark)'],
+      advanced: ['Deep Learning for Analytics', 'Time Series Forecasting', 'Experimental Design (A/B Testing)', 'AI Strategy for Business']
+    }
   },
   {
     id: 'ui-ux',
     name: 'UI/UX Design',
     career: 'Design digital experiences.',
     techStack: ['Figma', 'Wireframing', 'User Research'],
-    description: 'User-centric design and behavioral research.'
-  },
-  {
-    id: 'graphic-design',
-    name: 'Graphic Design',
-    career: 'Branding and visual communication.',
-    techStack: ['Photoshop', 'Illustrator', 'Canva'],
-    description: 'Visual identity and branding strategy.'
-  },
-  {
-    id: 'content-creation',
-    name: 'Content Creation',
-    career: 'Digital storytelling and audience building.',
-    techStack: ['Video Editing', 'Social Media', 'Writing'],
-    description: 'Engagement through media and storytelling.'
-  },
-  {
-    id: 'marketing',
-    name: 'Marketing',
-    career: 'Promote products and grow users.',
-    techStack: ['SEO', 'Social Marketing', 'Branding', 'Analytics'],
-    description: 'Growth hacking and user acquisition.'
+    description: 'User-centric design and behavioral research.',
+    roadmap: {
+      foundation: ['Design Principles (Alignment/Contrast)', 'Color Theory', 'Typography Basics', 'Figma Fundamentals'],
+      intermediate: ['User Research Methodologies', 'High-Fidelity Prototyping', 'Design Systems Creation', 'Information Architecture'],
+      advanced: ['Accessibility (WCAG) Auditing', 'Behavioral Psychology in Design', 'Conversion Rate Optimization (CRO)', 'Strategic UX Leadership']
+    }
   }
 ];
