@@ -24,11 +24,11 @@ export default function PortalLayout({
       <nav className="h-20 border-b border-slate-100 flex items-center justify-between px-6 md:px-10 flex-shrink-0 bg-white z-30">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 p-2">
-            <img src="https://kommodo.ai/i/D9EbP1JE0Xal0CY6cqRu" alt="Drenchack Logo" className="w-full h-full object-contain" />
+           <img src="/logo 2.png"  alt="Drenchack Tech Company Logo"  className="w-full h-full object-contain"  loading="eager"/>
           </div>
           <div className="hidden sm:block">
             <h1 className="font-black text-lg leading-tight tracking-tighter text-slate-900">ASSESSMENT</h1>
-            <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-black">Innovation & Excellence</p>
+            <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-black">Innovation & Future Builders</p>
           </div>
         </div>
         
