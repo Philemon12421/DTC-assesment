@@ -42,7 +42,7 @@ export default function Documentation({ onBack }: DocumentationProps) {
             <img src="https://kommodo.ai/i/D9EbP1JE0Xal0CY6cqRu" alt="Logo" className="w-full h-full object-contain" />
           </div>
           <div>
-            <h1 className="font-black text-lg tracking-tighter text-slate-900 leading-none">DRENCHACK TECH</h1>
+            <h1 className="font-black text-lg tracking-tighter text-slate-900 leading-none">ASSESSMENT</h1>
             <p className="text-[9px] text-slate-400 uppercase tracking-[0.2em] font-black">Documentation Center</p>
           </div>
         </div>
@@ -62,8 +62,8 @@ export default function Documentation({ onBack }: DocumentationProps) {
         >
           <header className="space-y-4">
             <span className="px-3 py-1 bg-primary/20 rounded-full text-[10px] font-black uppercase tracking-widest text-primary-dark">Official Guide</span>
-            <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">The DTC Blueprint</h2>
-            <p className="text-xl text-slate-500 font-medium max-w-2xl">Everything you need to know about joining the elite innovation force and our technical expectations.</p>
+            <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">The Assessment Blueprint</h2>
+            <p className="text-xl text-slate-500 font-medium max-w-2xl">Everything you need to know about joining our elite innovation force and our technical expectations.</p>
           </header>
 
           <div className="grid gap-12">

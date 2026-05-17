@@ -19,7 +19,7 @@ export default function PortalLayout({
   candidateId = "DTC-9921"
 }: PortalLayoutProps) {
   return (
-    <div className="w-full h-screen bg-white text-slate-900 font-sans flex flex-col overflow-hidden">
+    <div className="w-full min-h-screen bg-white text-slate-900 font-sans flex flex-col">
       {/* Top Navigation Bar */}
       <nav className="h-20 border-b border-slate-100 flex items-center justify-between px-6 md:px-10 flex-shrink-0 bg-white z-30">
         <div className="flex items-center gap-4">
@@ -27,7 +27,7 @@ export default function PortalLayout({
             <img src="https://kommodo.ai/i/D9EbP1JE0Xal0CY6cqRu" alt="Drenchack Logo" className="w-full h-full object-contain" />
           </div>
           <div className="hidden sm:block">
-            <h1 className="font-black text-lg leading-tight tracking-tighter text-slate-900">DRENCHACK TECH COMPANY</h1>
+            <h1 className="font-black text-lg leading-tight tracking-tighter text-slate-900">ASSESSMENT</h1>
             <p className="text-[10px] text-slate-400 uppercase tracking-[0.3em] font-black">Innovation & Excellence</p>
           </div>
         </div>
@@ -88,9 +88,9 @@ export default function PortalLayout({
             transition={{ delay: 0.5 }}
             className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200"
           >
-            <p className="text-[10px] font-bold text-primary-dark uppercase tracking-widest mb-2">DTC Wisdom</p>
+            <p className="text-[10px] font-bold text-primary-dark uppercase tracking-widest mb-2">Wisdom</p>
             <p className="text-xs italic leading-relaxed text-slate-600 font-medium">
-              "Ideas grow when people work together. We don't just build software, we build people."
+              "We don't just build software, we build people. Excellence is our only standard."
             </p>
           </motion.div>
         </aside>

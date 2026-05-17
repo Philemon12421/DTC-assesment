@@ -87,7 +87,7 @@ export default function Processing({ candidateData, onComplete }: ProcessingProp
         <div className="text-center space-y-4">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900">Reviewing Your Talent Profile</h2>
           <p className="text-slate-500 max-w-lg mx-auto leading-relaxed">
-            DTC criteria are high. We are currently evaluating your technical competence and cultural alignment.
+            Our assessment criteria are high. We are currently evaluating your technical competence and cultural alignment.
           </p>
         </div>
 

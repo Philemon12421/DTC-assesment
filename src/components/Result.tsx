@@ -37,12 +37,12 @@ export default function Result({ candidateData }: ResultProps) {
     doc.rect(0, 0, 210, 40, 'F');
     doc.setFontSize(24);
     doc.setTextColor(15, 23, 42); // Slate-900
-    doc.text('DRENCHACK TECH COMPANY (DTC)', 105, 25, { align: 'center' });
+    doc.text('ASSESSMENT PORTAL', 105, 25, { align: 'center' });
     
     // Content
     doc.setFontSize(16);
     doc.setTextColor(51, 65, 85); // Slate-700
-    doc.text('OFFICIAL ACCEPTANCE LETTER', 105, 55, { align: 'center' });
+    doc.text('OFFICIAL ASSESSMENT ACCEPTANCE', 105, 55, { align: 'center' });
     
     doc.setFontSize(12);
     doc.text(`Date: ${date}`, 20, 75);
@@ -52,11 +52,11 @@ export default function Result({ candidateData }: ResultProps) {
     const bodyText = `
 Dear ${candidateData.fullName},
 
-It is with great pleasure that we officially welcome you to Drenchack Tech Company (DTC). 
+It is with great pleasure that we officially welcome you to the ASSESSMENT collective. 
 
-Following a rigorous evaluation of your technical capabilities, professional experience, and creative potential, we are pleased to confirm your acceptance as an Elite Member of our innovation collective. Your impressive assessment score of ${candidateData.assessmentScore}% demonstrates the high level of expertise and dedication we value at DTC.
+Following a rigorous evaluation of your technical capabilities, professional experience, and creative potential, we are pleased to confirm your acceptance as an Elite Member of our innovation collective. Your impressive assessment score of ${candidateData.assessmentScore}% demonstrates the high level of expertise and dedication we value.
 
-At Drenchack Tech Company, we are committed to pushing the boundaries of what is possible in the digital landscape. We don't just build software; we pioneer transformative solutions that impact people globally. As part of our team, you will be integral to our mission of delivering excellence through collaborative innovation.
+At ASSESSMENT, we are committed to pushing the boundaries of what is possible in the digital landscape. We don't just build software; we pioneer transformative solutions that impact people globally. As part of our team, you will be integral to our mission of delivering excellence through collaborative innovation.
 
 You will soon receive a comprehensive onboarding package via email, which will detail your initial project assignments, team structure, and access credentials for our private development repositories.
 
@@ -81,9 +81,9 @@ Drenchack Tech Company (DTC)
     doc.setFont("helvetica", "bold");
     doc.text('Philemon Osei', 20, 246);
     doc.setFont("helvetica", "normal");
-    doc.text('Founder & CEO, DTC', 20, 252);
+    doc.text('Founder & CEO, ASSESSMENT', 20, 252);
     
-    doc.save(`DTC_Acceptance_Letter_${candidateData.fullName.replace(/\s+/g, '_')}.pdf`);
+    doc.save(`ASSESSMENT_Letter_${candidateData.fullName.replace(/\s+/g, '_')}.pdf`);
   };
 
   const shareToWhatsApp = () => {

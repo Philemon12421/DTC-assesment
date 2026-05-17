@@ -64,7 +64,7 @@ export const PORTAL_FAQS: FAQItem[] = [
   {
     section: "information",
     question: "Do I need to be in a specific time zone?",
-    answer: "No, DTC is remote-first. However, we expect at least 4 hours of overlap with GMT+1 for team syncs."
+    answer: "No, our portal and team are remote-first. However, we expect at least 4 hours of overlap with GMT+1 for team syncs."
   },
   {
     section: "commitment",

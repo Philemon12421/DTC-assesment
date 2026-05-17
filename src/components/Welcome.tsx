@@ -58,7 +58,7 @@ export default function Welcome({ onStart, onViewDocs }: WelcomeProps) {
               </span>
             </h1>
             <p className="text-base sm:text-xl md:text-2xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-medium px-4">
-              Drenchack Tech Company is a global innovation firm. We build high-impact software, solve complex problems, and develop elite talent.
+              ASSESSMENT is a global innovation firm. We build high-impact software, solve complex problems, and develop elite talent.
             </p>
           </motion.div>
 
@@ -74,7 +74,7 @@ export default function Welcome({ onStart, onViewDocs }: WelcomeProps) {
                 onClick={onStart}
                 className="w-full sm:w-auto group relative px-12 py-5 bg-primary hover:bg-primary-hover text-slate-900 rounded-[2rem] font-black text-lg shadow-2xl shadow-primary/20 transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3"
               >
-                Join DTC Collective
+                Join ASSESSMENT Collective
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               
@@ -106,7 +106,7 @@ export default function Welcome({ onStart, onViewDocs }: WelcomeProps) {
 
       {/* Corporate Footer (Partial) */}
       <footer className="p-8 border-t border-slate-100 flex justify-between items-center bg-slate-50/50">
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">© 2026 DRENCHACK TECH COMPANY. ALL RIGHTS RESERVED.</p>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">© 2026 ASSESSMENT. ALL RIGHTS RESERVED.</p>
         <div className="flex gap-6">
           <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">Privacy Policy</span>
           <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">Candidate Terms</span>

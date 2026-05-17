@@ -279,7 +279,7 @@ export default function AssessmentForm({
 
                  <div className="space-y-4 pt-6 mt-6 border-t border-slate-100">
                     <h3 className="font-bold text-slate-800">Professional Accounts</h3>
-                    <p className="text-xs text-slate-500">Creating these professional accounts is compulsory for all DTC members.</p>
+                    <p className="text-xs text-slate-500">Creating these professional accounts is compulsory for all members.</p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="relative">
                         <Linkedin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -310,7 +310,7 @@ export default function AssessmentForm({
               <div className="bg-primary/20 border border-primary/40 p-6 md:p-8 rounded-[2rem] mb-8 flex justify-between items-center">
                 <div>
                   <h2 className="text-2xl font-black text-slate-900 mb-1">Team Commitment</h2>
-                  <p className="text-slate-700 font-medium">DTC is built on dedication and mutual respect.</p>
+                  <p className="text-slate-700 font-medium">This platform is built on dedication and mutual respect.</p>
                 </div>
                 <button 
                   type="button"
@@ -482,7 +482,7 @@ export default function AssessmentForm({
             >
               <div className="bg-accent/50 border border-primary/20 p-6 rounded-2xl mb-8 flex justify-between items-center">
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900 mb-2">DTC Assessment Stage</h2>
+                  <h2 className="text-2xl font-bold text-slate-900 mb-2">Technical Assessment Stage</h2>
                   <p className="text-slate-600">Basic aptitude followed by role-specific challenges.</p>
                 </div>
                 <button 
@@ -527,7 +527,7 @@ export default function AssessmentForm({
                     )}
                   </AnimatePresence>
 
-                  <p className="text-slate-600 leading-relaxed pl-11">Imagine you are building a tool for DTC that needs to handle high traffic from multiple countries. Which architecture approach would you prioritize?</p>
+                  <p className="text-slate-600 leading-relaxed pl-11">Imagine you are building a tool for our platform that needs to handle high traffic from multiple countries. Which architecture approach would you prioritize?</p>
                   <div className="space-y-3 pl-11">
                     {[
                       "Client-side processing only",
@@ -758,10 +758,10 @@ export default function AssessmentForm({
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-slate-900 font-bold">
                     <Target className="w-5 h-5 text-primary-dark" />
-                    <h4>The Role at DTC</h4>
+                    <h4>Technical Roadmap</h4>
                   </div>
                   <p className="text-slate-600 leading-relaxed text-sm font-medium">
-                    {activeSkillInfo.career} In this track, you will be responsible for building high-performance systems and contributing to the core Drenchack ecosystem.
+                    {activeSkillInfo.career} In this track, you will be responsible for building high-performance systems and contributing to the core ASSESSMENT ecosystem.
                   </p>
                 </div>
 
@@ -769,7 +769,7 @@ export default function AssessmentForm({
                   <div className="space-y-6">
                     <div className="flex items-center gap-2 text-slate-900 font-bold">
                       <Zap className="w-5 h-5 text-primary-dark" />
-                      <h4>DTC Learning Roadmap</h4>
+                      <h4>Learning Roadmap</h4>
                     </div>
                     <div className="grid gap-4">
                       {Object.entries(activeSkillInfo.roadmap).map(([level, items], idx) => (
