@@ -35,6 +35,8 @@ export type CandidateData = {
   github: string;
   twitter: string;
   selectedSkills: string[];
+  skillJustifications?: Record<string, string>;
+  skillPriorities?: string[];
   assessmentScore: number;
   submittedAt: string;
   status: 'pending' | 'accepted' | 'rejected';

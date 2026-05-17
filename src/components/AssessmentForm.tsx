@@ -23,6 +23,7 @@ export default function AssessmentForm({
   currentStep 
 }: AssessmentFormProps) {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const [justifications, setJustifications] = useState<Record<string, string>>({});
   const [activeSkillInfo, setActiveSkillInfo] = useState<Skill | null>(null);
   const [activeFaq, setActiveFaq] = useState<FAQItem[] | null>(null);
   const [isConfirming, setIsConfirming] = useState(false);
@@ -38,6 +39,8 @@ export default function AssessmentForm({
       email: '',
       phone: '',
       country: '',
+      skillJustifications: {},
+      skillPriorities: [],
     }
   });
 
@@ -76,11 +79,20 @@ export default function AssessmentForm({
   const toggleSkill = (id: string) => {
     if (selectedSkills.includes(id)) {
       setSelectedSkills(prev => prev.filter(s => s !== id));
+      setJustifications(prev => {
+        const next = { ...prev };
+        delete next[id];
+        return next;
+      });
     } else {
       if (selectedSkills.length < 3) {
         setSelectedSkills(prev => [...prev, id]);
       }
     }
+  };
+
+  const handleJustificationChange = (id: string, value: string) => {
+    setJustifications(prev => ({ ...prev, [id]: value }));
   };
 
   const onFormSubmit = async (data: CandidateData) => {
@@ -90,6 +102,8 @@ export default function AssessmentForm({
     const finalData = {
       ...data,
       selectedSkills,
+      skillJustifications: justifications,
+      skillPriorities: selectedSkills,
       assessmentScore: score,
       submittedAt: new Date().toISOString(),
     };
@@ -347,34 +361,51 @@ export default function AssessmentForm({
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -20, opacity: 0 }}
-              className="space-y-8 h-full"
+              className="space-y-12 h-full"
             >
-              <header>
-                <h2 className="text-3xl font-bold tracking-tight text-slate-900">Select Your Career Path</h2>
-                <p className="text-slate-500 mt-2">Choose up to <span className="text-primary-dark font-bold">three skills</span> that align with your professional goals.</p>
+              <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                  <h2 className="text-3xl font-black tracking-tight text-slate-900 leading-none">Select Your Career Path</h2>
+                  <p className="text-slate-500 mt-3 font-medium">Choose up to <span className="text-primary-dark font-black">three skills</span> to specialize in at DTC.</p>
+                </div>
+                {selectedSkills.length > 0 && (
+                  <div className="flex gap-2">
+                    {selectedSkills.map((sid, idx) => (
+                      <div key={sid} className="bg-slate-900 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                        <span className="w-4 h-4 rounded bg-primary text-slate-900 flex items-center justify-center text-[8px]">{idx + 1}</span>
+                        {SKILLS.find(s => s.id === sid)?.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </header>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {SKILLS.map((skill) => {
-                  const isSelected = selectedSkills.includes(skill.id);
+                  const selectionIndex = selectedSkills.indexOf(skill.id);
+                  const isSelected = selectionIndex !== -1;
                   return (
-                    <motion.div
-                      key={skill.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      whileHover={{ y: -8, scale: 1.02 }}
-                      className={cn(
-                        "premium-card p-6 relative cursor-pointer group flex flex-col",
-                        isSelected && "premium-card-selected ring-4 ring-primary/20"
-                      )}
-                    >
-                      <div className="flex-1" onClick={() => toggleSkill(skill.id)}>
+                    <div key={skill.id} className="space-y-4">
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        whileHover={{ y: -8, scale: 1.02 }}
+                        className={cn(
+                          "premium-card p-6 relative cursor-pointer group flex flex-col transition-all duration-500",
+                          isSelected && "premium-card-selected ring-4 ring-primary/20",
+                          !isSelected && selectedSkills.length >= 3 && "opacity-50 grayscale"
+                        )}
+                        onClick={() => toggleSkill(skill.id)}
+                      >
                         {isSelected && (
                           <motion.div 
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
-                            className="absolute top-4 right-4 text-primary"
+                            className="absolute top-4 right-4 flex items-center gap-2"
                           >
+                            <span className="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center text-xs font-black shadow-lg">
+                              #{selectionIndex + 1}
+                            </span>
                             <CheckCircle2 className="w-6 h-6 fill-primary text-white" />
                           </motion.div>
                         )}
@@ -387,9 +418,9 @@ export default function AssessmentForm({
                         </div>
 
                         <h3 className="font-bold text-lg mb-1 text-slate-900">{skill.name}</h3>
-                        <p className="text-xs text-slate-500 mb-4 leading-relaxed">{skill.career}</p>
+                        <p className="text-xs text-slate-500 mb-4 leading-relaxed line-clamp-2">{skill.career}</p>
                         
-                        <div className="space-y-1 mb-12">
+                        <div className="space-y-1 mb-10">
                           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tech Stack</p>
                           <div className="flex flex-wrap gap-1.5">
                             {skill.techStack.map(tech => (
@@ -399,19 +430,42 @@ export default function AssessmentForm({
                             ))}
                           </div>
                         </div>
-                      </div>
 
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setActiveSkillInfo(skill);
-                        }}
-                        className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-primary-dark transition-colors"
-                      >
-                        <Info className="w-3 h-3" /> Learn More
-                      </button>
-                    </motion.div>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveSkillInfo(skill);
+                          }}
+                          className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-primary-dark transition-colors"
+                        >
+                          <Zap className="w-3 h-3" /> Technical Roadmap
+                        </button>
+                      </motion.div>
+
+                      <AnimatePresence>
+                        {isSelected && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="p-5 bg-primary/5 border border-primary/20 rounded-2xl space-y-3">
+                              <label className="text-[10px] font-black uppercase tracking-widest text-primary-dark">Why this skill?</label>
+                              <textarea 
+                                value={justifications[skill.id] || ''}
+                                onChange={(e) => handleJustificationChange(skill.id, e.target.value)}
+                                onClick={(e) => e.stopPropagation()}
+                                placeholder="Briefly justify your interest..."
+                                className="w-full bg-white/50 border border-primary/10 rounded-xl p-3 text-sm focus:bg-white outline-none transition-all min-h-[80px]"
+                                required
+                              />
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   );
                 })}
               </div>
@@ -700,7 +754,7 @@ export default function AssessmentForm({
                    <X className="w-5 h-5 text-slate-900" />
                  </button>
               </div>
-              <div className="p-10 space-y-8">
+              <div className="p-10 space-y-8 max-h-[70vh] overflow-y-auto">
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-slate-900 font-bold">
                     <Target className="w-5 h-5 text-primary-dark" />
@@ -711,20 +765,34 @@ export default function AssessmentForm({
                   </p>
                 </div>
 
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-slate-900 font-bold">
-                    <Zap className="w-5 h-5 text-primary-dark" />
-                    <h4>Growth Trajectory</h4>
+                {activeSkillInfo.roadmap && (
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-2 text-slate-900 font-bold">
+                      <Zap className="w-5 h-5 text-primary-dark" />
+                      <h4>DTC Learning Roadmap</h4>
+                    </div>
+                    <div className="grid gap-4">
+                      {Object.entries(activeSkillInfo.roadmap).map(([level, items], idx) => (
+                        <div key={level} className="bg-slate-50 p-6 rounded-3xl border border-slate-100 space-y-3">
+                          <div className="flex items-center gap-2">
+                             <div className={cn(
+                               "w-2 h-2 rounded-full",
+                               idx === 0 ? "bg-primary" : idx === 1 ? "bg-blue-500" : "bg-purple-500"
+                             )} />
+                             <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">{level}</span>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {(items as string[]).map(item => (
+                              <span key={item} className="px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-600">
+                                {item}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="space-y-3">
-                    {activeSkillInfo.techStack.map((tech, i) => (
-                      <div key={tech} className="flex items-center gap-4">
-                        <div className="w-8 h-8 rounded-xl bg-slate-50 flex items-center justify-center text-xs font-black text-slate-400 border border-slate-100">{i + 1}</div>
-                        <span className="text-sm font-bold text-slate-700">{tech} Mastery</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                )}
 
                 <div className="pt-6 border-t border-slate-50">
                   <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">
@@ -772,12 +840,19 @@ export default function AssessmentForm({
                 <p className="text-slate-500 leading-relaxed font-medium">
                   You've selected <span className="text-slate-900 font-bold">{selectedSkills.length} career tracks</span>. Your submission will be final and entered into our elite talent review pool.
                 </p>
-                <div className="flex flex-wrap justify-center gap-2 pt-2">
-                  {selectedSkills.map(sid => (
-                    <span key={sid} className="px-3 py-1 bg-slate-50 text-[10px] font-black uppercase tracking-widest text-slate-500 rounded-lg border border-slate-100">
-                      {sid}
-                    </span>
-                  ))}
+                <div className="space-y-3 pt-4">
+                  {selectedSkills.map((sid, idx) => {
+                    const skill = SKILLS.find(s => s.id === sid);
+                    return (
+                      <div key={sid} className="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-left">
+                        <div className="flex items-center justify-between mb-2">
+                           <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Choice #{idx + 1}</span>
+                           <span className="px-2 py-1 bg-primary/20 rounded text-[9px] font-black uppercase tracking-tighter text-primary-dark">{skill?.name}</span>
+                        </div>
+                        <p className="text-xs text-slate-600 font-medium italic">"{justifications[sid] || 'No justification provided'}"</p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="flex flex-col gap-3">
